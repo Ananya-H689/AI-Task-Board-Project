@@ -2,6 +2,7 @@
 
 AI Task Board is a full-stack meeting transcript analysis web application that converts raw meeting discussions into structured, actionable tasks using rule-based NLP logic.
 
+---
 
 ## 📌 Overview
 
@@ -9,7 +10,7 @@ This project is designed to simplify meeting follow-ups. Instead of manually rev
 
 The system extracts action items, identifies assignees from names mentioned in the conversation, classifies task priority, and organizes tasks into a manageable workflow.
 
-
+---
 
 ## ✨ Features
 
@@ -26,7 +27,7 @@ The system extracts action items, identifies assignees from names mentioned in t
 * Reset task board
 * Backend storage using MongoDB
 
-
+---
 
 ## 🛠️ Tech Stack
 
@@ -36,7 +37,7 @@ The system extracts action items, identifies assignees from names mentioned in t
 * **ODM:** Mongoose
 * **Authentication:** Basic username/password system (hashed passwords)
 
-
+---
 
 ## 📁 Project Structure
 
@@ -55,7 +56,7 @@ AI_TASK_BOARD/
 └── README.md
 ```
 
-
+---
 
 ## ⚙️ How It Works
 
@@ -70,7 +71,7 @@ AI_TASK_BOARD/
 9. Data is stored in MongoDB
 10. Dashboard displays All Tasks, My Tasks, and Done
 
-
+---
 
 ## 🧠 Task Logic
 
@@ -98,7 +99,7 @@ The system also:
 * Ignores filler phrases where possible
 * Converts unstructured text into structured actions
 
-
+---
 
 ## 🔗 API Endpoints
 
@@ -162,9 +163,9 @@ Save transcript + tasks
   "transcript": "Neha send report",
   "tasks": ["send report"]
 }
+```
 
-
-
+---
 
 ### GET /meetings
 
@@ -174,15 +175,15 @@ Fetch all stored meetings
 
 ## 🧪 Example Input
 
-text
+```text
 Priya fix the UI alignment and check navbar.
 
 Arjun debug the backend APIs.
 
 Neha prepare slides and send them to the team.
+```
 
-
-
+---
 
 ## ✅ Example Output
 
@@ -199,31 +200,33 @@ Neha prepare slides and send them to the team.
     "priority": "medium"
   }
 ]
+```
 
-
-
+---
 
 ## 📸 Screenshots
 
 ### 🔹 Login Page
 
-<img width="436" height="531" alt="Screenshot 2026-04-16 202550" src="https://github.com/user-attachments/assets/750c0af5-423e-4358-91ce-cde139570a89" />
+<img width="436" height="531" alt="Screenshot 2026-04-16 202550" src="https://github.com/user-attachments/assets/f3b74c5f-9557-4da1-a41e-d325f75615c8" />
+
 
 ### 🔹 Task Board
 
-<img width="1022" height="812" alt="Screenshot 2026-04-16 195139" src="https://github.com/user-attachments/assets/eba372fc-70b8-452f-a87f-d7083768121d" />
+<img width="1022" height="812" alt="Screenshot 2026-04-16 195139" src="https://github.com/user-attachments/assets/396438db-2144-4572-b39d-e5521678e3e4" />
 
 
 ### 🔹 Extracted Tasks
 
-<img width="1913" height="941" alt="Screenshot 2026-04-16 195917" src="https://github.com/user-attachments/assets/6402212c-c582-4eb1-abae-543f508ec310" />
+<img width="1862" height="855" alt="Screenshot 2026-04-16 195956" src="https://github.com/user-attachments/assets/429ef638-9a01-448c-bf51-15036656ee0d" />
 
 
 ### 🔹 Done Section
 
-<img width="1862" height="855" alt="Screenshot 2026-04-16 195956" src="https://github.com/user-attachments/assets/dfca45b0-5ff8-4df4-8936-0218fdf40b32" />
+<img width="1862" height="855" alt="Screenshot 2026-04-16 195956" src="https://github.com/user-attachments/assets/b83e4029-8212-46b3-bf1d-5552c430c47d" />
 
 
+---
 
 ## 🚧 Future Improvements
 
@@ -235,7 +238,7 @@ Neha prepare slides and send them to the team.
 * Team dashboards
 * Export to PDF or CSV
 
-
+---
 
 ## 📄 License
 
