@@ -213,17 +213,19 @@ Neha prepare slides and send them to the team.
 
 ### 🔹 Task Board
 
-<img width="1022" height="812" alt="Screenshot 2026-04-16 195139" src="https://github.com/user-attachments/assets/396438db-2144-4572-b39d-e5521678e3e4" />
-
+<img width="1905" height="921" alt="Screenshot 2026-04-16 211250" src="https://github.com/user-attachments/assets/750fcccf-0064-4633-8c5d-1dc1af496397" />
 
 ### 🔹 Extracted Tasks
 
-<img width="1862" height="855" alt="Screenshot 2026-04-16 195956" src="https://github.com/user-attachments/assets/429ef638-9a01-448c-bf51-15036656ee0d" />
+<img width="1895" height="896" alt="Screenshot 2026-04-16 211356" src="https://github.com/user-attachments/assets/5aaf7ff6-c2cf-4633-af17-e58e4028c96d" />
 
 
 ### 🔹 Done Section
 
 <img width="1862" height="855" alt="Screenshot 2026-04-16 195956" src="https://github.com/user-attachments/assets/b83e4029-8212-46b3-bf1d-5552c430c47d" />
+
+### 🔹 Mongodb Section
+ <img width="1916" height="1076" alt="Screenshot 2026-04-16 200305" src="https://github.com/user-attachments/assets/bcaced68-f9f1-4331-a4f6-074afafe3348" />
 
 
 ---
