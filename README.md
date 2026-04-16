@@ -245,3 +245,9 @@ Neha prepare slides and send them to the team.
 ## 📄 License
 
 This project is developed for academic and learning purposes.
+
+## 📄 Project Report
+
+You can view the full project report here:
+
+[📥 Download Report]("C:\Users\hebba\Downloads\AI_task_board_report (2).pdf")
