@@ -1,0 +1,209 @@
+[
+  {
+    "id": "task_1776267829093_7554hx",
+    "text": "need to go over the AI Meeting Task Manager project and fix the issues from the last build",
+    "assignee": "We",
+    "priority": "high",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.093Z"
+  },
+  {
+    "id": "task_1776267829093_rbppg8",
+    "text": "said the login button is still not opening the main app properly, so he will fix the login flow",
+    "assignee": "Rahul",
+    "priority": "high",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.093Z"
+  },
+  {
+    "id": "task_1776267829093_vbcgey",
+    "text": "test it again in Live Server today",
+    "assignee": "Unassigned",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.093Z"
+  },
+  {
+    "id": "task_1776267829093_x4a5vl",
+    "text": "noticed that the JavaScript files were placed outside the js folder, so she will correct the file paths and make sure the page loads without errors",
+    "assignee": "Priya",
+    "priority": "high",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.093Z"
+  },
+  {
+    "id": "task_1776267829093_71zv8u",
+    "text": "confirmed that the backend is running on localhost and he will check the CORS setup to ensure the frontend can connect properly",
+    "assignee": "Aman",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.093Z"
+  },
+  {
+    "id": "task_1776267829093_m8j19j",
+    "text": "suggested that we prepare a long sample transcript for testing, and she will collect one realistic meeting script with many action items",
+    "assignee": "Neha",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.093Z"
+  },
+  {
+    "id": "task_1776267829093_78hqx8",
+    "text": "said the parser is not catching all tasks correctly, so he will improve the transcript extraction logic and reduce duplicate tasks",
+    "assignee": "Karan",
+    "priority": "low",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.093Z"
+  },
+  {
+    "id": "task_1776267829093_yf8vke",
+    "text": "she will update the CSS layout",
+    "assignee": "Unassigned",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.093Z"
+  },
+  {
+    "id": "task_1776267829093_ljqgk3",
+    "text": "improve responsiveness",
+    "assignee": "Unassigned",
+    "priority": "low",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.093Z"
+  },
+  {
+    "id": "task_1776267829094_uvqqip",
+    "text": "wants to add a better search filter for tasks, so he will work on the search logic",
+    "assignee": "Vikram",
+    "priority": "low",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_fasg7r",
+    "text": "make the board easier to use",
+    "assignee": "Unassigned",
+    "priority": "low",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_a2mjw3",
+    "text": "delete actions should be tested more carefully,",
+    "assignee": "Unassigned",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_vv1xv1",
+    "text": "she will review the update flow to make sure changes are saved correctly",
+    "assignee": "Unassigned",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_6klx4a",
+    "text": "he will verify the backend save logic",
+    "assignee": "Unassigned",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_1s4avh",
+    "text": "said she will prepare the testing notes",
+    "assignee": "Sana",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_9r4uxg",
+    "text": "send the final checklist after lunch",
+    "assignee": "Unassigned",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_7x12mx",
+    "text": "also said he will send a final update in the evening after confirming the login issue is fixed",
+    "assignee": "Rahul",
+    "priority": "high",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_28poe5",
+    "text": "has checked the server startup and confirmed the API is responding",
+    "assignee": "Aman",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_rtu4qf",
+    "text": "will share it with the team",
+    "assignee": "Unassigned",
+    "priority": "low",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_fz3dkr",
+    "text": "will finish the duplicate filter update tomorrow",
+    "assignee": "Karan",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_4u3yeq",
+    "text": "will add the search improvement after the current version is stable",
+    "assignee": "Vikram",
+    "priority": "low",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_jd28l1",
+    "text": "will test the edit and delete buttons again before the next meeting",
+    "assignee": "Meena",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  },
+  {
+    "id": "task_1776267829094_johh05",
+    "text": "will send the testing notes once the transcript check is complete",
+    "assignee": "Sana",
+    "priority": "medium",
+    "done": false,
+    "starred": false,
+    "createdAt": "2026-04-15T15:43:49.094Z"
+  }
+]
