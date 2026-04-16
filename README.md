@@ -250,4 +250,4 @@ This project is developed for academic and learning purposes.
 
 You can view the full project report here:
 
-[📥 Download Report]("C:\Users\hebba\Downloads\AI_task_board_report (2).pdf")
+[📥 Download Report](./AI_Task_Board_Report.pdf)
