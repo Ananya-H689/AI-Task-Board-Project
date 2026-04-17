@@ -1,4 +1,4 @@
-var API_BASE = 'http://localhost:3000';
+var API_BASE = 'http://localhost:5000';
 
 
 
@@ -40,14 +40,17 @@ function handleAuth() {
   var role = document.getElementById('auth-role').value.trim();
   var errorEl = document.getElementById('auth-error');
 
-
-
-  if (!name || !email || !password) {
-    errorEl.textContent = 'Name, email, and password are required.';
-    return;
+  if (authMode === 'register') {
+    if (!name || !email || !password) {
+      errorEl.textContent = 'Name, email, and password are required.';
+      return;
+    }
+  } else {
+    if (!email || !password) {
+      errorEl.textContent = 'Email and password are required.';
+      return;
+    }
   }
-
-
 
   fetch(API_BASE + '/' + authMode, {
     method: 'POST',
