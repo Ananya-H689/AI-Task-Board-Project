@@ -48,6 +48,8 @@ const StateSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 const User = mongoose.model('User', UserSchema);
+
+/* ✅ FIXED: removed forced 'tasks' collection */
 const TaskState = mongoose.model('TaskState', StateSchema);
 
 function clean(v) { return String(v || '').trim(); }
@@ -67,6 +69,7 @@ function dedupeTasks(tasks) {
   return out;
 }
 
+/* ✅ FIXED: safe upsert (no duplicate crash) */
 async function ensureState(userId) {
   return await TaskState.findOneAndUpdate(
     { userId },
@@ -188,14 +191,12 @@ app.post('/register', async (req, res) => {
     const password = clean(req.body.password);
     const role = clean(req.body.role);
 
-    if (!name || !email || !password) {
-      return res.status(400).json({ success: false, message: 'Name, email and password are required.' });
-    }
+    if (!name || !email || !password)
+      return res.json({ success: false, message: 'Name, email and password are required.' });
 
     const existing = await User.findOne({ email });
-    if (existing) {
-      return res.status(409).json({ success: false, message: 'Email already registered. Please login.' });
-    }
+    if (existing)
+      return res.json({ success: false, message: 'Email already registered. Please login.' });
 
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await User.create({ name, email, passwordHash, role });
@@ -208,7 +209,7 @@ app.post('/register', async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ success: false, message: err.message });
+    return res.json({ success: false, message: err.message }); // 🔥 shows real error
   }
 });
 
@@ -217,19 +218,16 @@ app.post('/login', async (req, res) => {
     const email = clean(req.body.email).toLowerCase();
     const password = clean(req.body.password);
 
-    if (!email || !password) {
-      return res.status(400).json({ success: false, message: 'Email and password are required.' });
-    }
+    if (!email || !password)
+      return res.json({ success: false, message: 'Email and password are required.' });
 
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ success: false, message: 'User not found.' });
-    }
+    if (!user)
+      return res.json({ success: false, message: 'User not found.' });
 
     const ok = await bcrypt.compare(password, user.passwordHash);
-    if (!ok) {
-      return res.status(401).json({ success: false, message: 'Wrong password.' });
-    }
+    if (!ok)
+      return res.json({ success: false, message: 'Wrong password.' });
 
     await ensureState(user._id);
 
@@ -239,99 +237,7 @@ app.post('/login', async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ success: false, message: 'Login failed.' });
-  }
-});
-
-app.get('/state/:userId', async (req, res) => {
-  try {
-    const state = await ensureState(req.params.userId);
-    res.json({ tasks: state.tasks || [], doneTasks: state.doneTasks || [], transcriptHistory: state.transcriptHistory || [] });
-  } catch (err) {
-    console.error(err);
-    res.json({ tasks: [], doneTasks: [], transcriptHistory: [] });
-  }
-});
-
-app.post('/state/:userId', async (req, res) => {
-  try {
-    const tasks = dedupeTasks(arr(req.body.tasks).filter(isValidTask));
-    const doneTasks = dedupeTasks(arr(req.body.doneTasks).filter(isValidTask));
-    await TaskState.findOneAndUpdate(
-      { userId: req.params.userId },
-      { userId: req.params.userId, tasks, doneTasks, updatedAt: new Date() },
-      { upsert: true, new: true }
-    );
-    res.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    res.json({ success: false, message: 'State save failed.' });
-  }
-});
-
-app.post('/analyze', async (req, res) => {
-  try {
-    console.log('ANALYZE BODY:', req.body);
-
-    const { userId, transcript, meetingIdentity } = req.body;
-    if (!userId || !transcript || !meetingIdentity) {
-      return res.json({ success: false, message: 'Missing required fields.' });
-    }
-
-    const state = await ensureState(userId);
-    const parsed = parseTranscript(transcript);
-    const currentTasks = dedupeTasks(arr(state.tasks));
-    const currentDone = dedupeTasks(arr(state.doneTasks));
-
-    const existsInAny = (task, list) =>
-      list.some(t =>
-        String(t.text || '').toLowerCase() === String(task.text || '').toLowerCase() &&
-        String(t.assignee || '').toLowerCase() === String(task.assignee || '').toLowerCase()
-      );
-
-    for (const task of parsed) {
-      if (task.done) {
-        if (!existsInAny(task, currentDone)) currentDone.push(task);
-      } else {
-        if (!existsInAny(task, currentTasks)) currentTasks.push(task);
-      }
-    }
-
-    const normalizedMeeting = String(meetingIdentity).toLowerCase();
-    const userFound = parsed.some(t => String(t.assignee || '').toLowerCase() === normalizedMeeting);
-
-    state.tasks = currentTasks;
-    state.doneTasks = currentDone;
-    state.transcriptHistory = state.transcriptHistory || [];
-    state.transcriptHistory.push({ transcript, meetingIdentity, createdAt: new Date() });
-    state.updatedAt = new Date();
-
-    await state.save();
-
-    return res.json({
-      success: true,
-      message: userFound ? `Extracted ${parsed.length} tasks.` : `${meetingIdentity} not found in meeting ❌`,
-      tasks: currentTasks,
-      doneTasks: currentDone,
-      parsedTasks: parsed
-    });
-  } catch (err) {
-    console.error(err);
-    res.json({ success: false, message: 'Analyze failed.' });
-  }
-});
-
-app.post('/reset/:userId', async (req, res) => {
-  try {
-    await TaskState.findOneAndUpdate(
-      { userId: req.params.userId },
-      { userId: req.params.userId, tasks: [], doneTasks: [], transcriptHistory: [], updatedAt: new Date() },
-      { upsert: true, new: true }
-    );
-    res.json({ success: true });
-  } catch (err) {
-    console.error(err);
-    res.json({ success: false, message: 'Reset failed.' });
+    return res.json({ success: false, message: 'Login failed.' });
   }
 });
 
