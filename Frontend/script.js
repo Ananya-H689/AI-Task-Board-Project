@@ -1,14 +1,10 @@
 var API_BASE = 'https://ai-task-board-backend.onrender.com';
 
-
-
 var authMode = 'login';
 var currentUser = null;
 var meetingIdentity = '';
 var allTasks = [];
 var doneTasks = [];
-
-
 
 window.addEventListener('DOMContentLoaded', function () {
   document.getElementById('btn-auth').addEventListener('click', handleAuth);
@@ -21,8 +17,6 @@ window.addEventListener('DOMContentLoaded', function () {
   renderAll();
 });
 
-
-
 function switchAuthMode() {
   authMode = authMode === 'login' ? 'register' : 'login';
   document.getElementById('auth-title').textContent = authMode === 'login' ? 'Smart meeting task extraction' : 'Create your account';
@@ -30,8 +24,6 @@ function switchAuthMode() {
   document.getElementById('btn-switch-auth').textContent = authMode === 'login' ? 'Need account? Register' : 'Have account? Login';
   document.getElementById('auth-error').textContent = '';
 }
-
-
 
 function handleAuth() {
   var name = document.getElementById('auth-name').value.trim();
@@ -52,10 +44,14 @@ function handleAuth() {
     }
   }
 
+  var payload = authMode === 'register'
+    ? { name: name, email: email, password: password, role: role }
+    : { email: email, password: password };
+
   fetch(API_BASE + '/' + authMode, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: name, email: email, password: password, role: role })
+    body: JSON.stringify(payload)
   })
     .then(function (r) { return r.json(); })
     .then(function (data) {
@@ -71,10 +67,10 @@ function handleAuth() {
       loadUserData();
       showToast('Welcome ' + currentUser.name + '!', 'success');
     })
-    .catch(function () { errorEl.textContent = 'Server error.'; });
+    .catch(function () {
+      errorEl.textContent = 'Server error.';
+    });
 }
-
-
 
 function loadSession() {
   var raw = localStorage.getItem('task_user');
@@ -92,8 +88,6 @@ function loadSession() {
   } catch (e) {}
 }
 
-
-
 function loadUserData() {
   if (!currentUser) return;
   fetch(API_BASE + '/state/' + currentUser.id)
@@ -106,8 +100,6 @@ function loadUserData() {
     .catch(function () {});
 }
 
-
-
 function logout() {
   localStorage.removeItem('task_user');
   currentUser = null;
@@ -118,29 +110,19 @@ function logout() {
   document.getElementById('main-app').style.display = 'none';
 }
 
-
-
 function handleAnalyze() {
   if (!currentUser) {
     showToast('Please login first.', 'error');
     return;
   }
 
-
-
   var transcript = document.getElementById('transcript').value.trim();
   var identity = document.getElementById('meeting-identity').value.trim();
-
-
 
   if (!transcript) return showToast('Paste a transcript first.', 'error');
   if (!identity) return showToast('Enter your meeting identity.', 'error');
 
-
-
   meetingIdentity = identity;
-
-
 
   fetch(API_BASE + '/analyze', {
     method: 'POST',
@@ -169,8 +151,6 @@ function handleAnalyze() {
     });
 }
 
-
-
 function handleReset() {
   if (!currentUser) return;
   if (!confirm('Reset all meeting tasks?')) return;
@@ -183,8 +163,6 @@ function handleReset() {
     });
 }
 
-
-
 function getFiltered(tasks, term) {
   if (!term) return tasks;
   term = term.toLowerCase();
@@ -193,8 +171,6 @@ function getFiltered(tasks, term) {
   });
 }
 
-
-
 function getMyTasks(tasks) {
   if (!meetingIdentity) return [];
   return tasks.filter(function (t) {
@@ -202,24 +178,16 @@ function getMyTasks(tasks) {
   });
 }
 
-
-
 function renderMyColumn(filteredAll) {
   var container = document.getElementById('col-mine');
   container.innerHTML = '';
-
-
 
   if (!meetingIdentity) {
     container.innerHTML = '<p class="empty-msg">Enter your meeting identity above, then click Analyze.</p>';
     return;
   }
 
-
-
   var myTasks = getMyTasks(filteredAll);
-
-
 
   if (!myTasks.length) {
     var found = filteredAll.some(function (t) {
@@ -231,15 +199,11 @@ function renderMyColumn(filteredAll) {
     return;
   }
 
-
-
   var handlers = getHandlers();
   myTasks.forEach(function (task) {
     container.appendChild(createTaskCard(task, handlers));
   });
 }
-
-
 
 function renderAll(searchTerm) {
   var term = (searchTerm || '').trim();
@@ -250,8 +214,6 @@ function renderAll(searchTerm) {
   renderColumn('col-done', filteredDone, getHandlers());
   updateCounts(allTasks.length, getMyTasks(allTasks).length, doneTasks.length);
 }
-
-
 
 function getHandlers() {
   return {
@@ -295,8 +257,6 @@ function getHandlers() {
     }
   };
 }
-
-
 
 function saveState() {
   if (!currentUser) return;
