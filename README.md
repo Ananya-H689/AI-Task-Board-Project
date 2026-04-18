@@ -1,47 +1,77 @@
 # 🧠 AI Task Board
 
-AI Task Board is a full-stack meeting transcript analysis web application that converts raw meeting discussions into structured, actionable tasks using rule-based NLP logic.
+AI Task Board is a full-stack web application that transforms raw meeting discussions into structured, actionable task boards using rule-based Natural Language Processing (NLP).
+
+---
+
+## 🌐 Live Demo
+
+* 🔗 **Frontend (Vercel):**
+  https://ai-task-board-project-llda9cnc1-ananya-h689s-projects.vercel.app/
+
+* 🔗 **Backend API (Render):**
+  https://ai-task-board-backend.onrender.com
+
+* 🗄️ **Database:** MongoDB Atlas (Cloud)
+
+---
+
+## 📄 Project Report
+
+📥 Download full project documentation:
+👉 [Download Report](./AI_Task_Board_Report.pdf)
 
 ---
 
 ## 📌 Overview
 
-This project is designed to simplify meeting follow-ups. Instead of manually reviewing notes and creating to-do lists, users can paste a meeting transcript and automatically generate a structured task board.
+In real-world meetings, discussions are often unstructured, lengthy, and scattered across multiple topics. Extracting meaningful action items manually can be time-consuming and inefficient.
 
-The system extracts action items, identifies assignees from names mentioned in the conversation, classifies task priority, and organizes tasks into a manageable workflow.
+**AI Task Board** solves this problem by intelligently converting meeting transcripts into a structured task management system.
+
+Instead of manually reviewing notes, users can simply paste a transcript, and the system will:
+
+* Identify actionable sentences
+* Automatically extract tasks
+* Detect responsible persons (assignees)
+* Classify task priority
+* Organize everything into a clean, interactive dashboard
+
+This significantly improves productivity, clarity, and accountability in team workflows.
 
 ---
 
 ## ✨ Features
 
-* User login and registration
-* Analyze raw meeting transcripts
-* Automatic task extraction
-* Assignee detection from meeting context
-* Priority classification (High / Medium / Low)
-* Separate pending and completed tasks
-* Manual task completion
-* Auto-detection of completed tasks (done, submitted, etc.)
-* Edit and delete tasks
-* Search tasks by keyword
-* Reset task board
-* Backend storage using MongoDB
+* 🔐 User Registration & Login
+* 🧠 Analyze raw meeting transcripts
+* 📌 Automatic task extraction
+* 👤 Assignee detection from meeting context
+* ⚡ Priority classification (High / Medium / Low)
+* 📋 Separate pending and completed tasks
+* ✅ Manual task completion
+* 🤖 Auto-detection of completed tasks (done, submitted, etc.)
+* ✏️ Edit and delete tasks
+* 🔍 Search tasks by keyword
+* 🔄 Reset task board
+* ☁️ Persistent backend storage using MongoDB Atlas
 
 ---
 
 ## 🛠️ Tech Stack
 
 * **Frontend:** HTML, CSS, JavaScript
-* **Backend:** Node.js, Express
-* **Database:** MongoDB
+* **Backend:** Node.js, Express.js
+* **Database:** MongoDB Atlas
 * **ODM:** Mongoose
-* **Authentication:** Basic username/password system (hashed passwords)
+* **Authentication:** bcrypt (password hashing)
+* **Deployment:** Vercel (Frontend), Render (Backend)
 
 ---
 
 ## 📁 Project Structure
 
-```bash
+```
 AI_TASK_BOARD/
 ├── Frontend/
 │   ├── index.html
@@ -50,9 +80,10 @@ AI_TASK_BOARD/
 │   └── js/
 │       ├── parser.js
 │       └── ui.js
-├── backend/
+├── Backend/
 │   ├── server.js
 │   └── package.json
+├── AI_Task_Board_Report.pdf
 └── README.md
 ```
 
@@ -61,21 +92,28 @@ AI_TASK_BOARD/
 ## ⚙️ How It Works
 
 1. User logs in or registers
-2. User enters their meeting identity
+2. User enters their meeting identity (name)
 3. User pastes a meeting transcript
-4. System analyzes text using rule-based NLP
-5. Action-oriented sentences are extracted as tasks
-6. Names in transcript are used to assign tasks
-7. Priority is classified using keywords
-8. Completed tasks are detected automatically or marked manually
-9. Data is stored in MongoDB
-10. Dashboard displays All Tasks, My Tasks, and Done
+4. The system processes the text using rule-based NLP
+5. Action-oriented sentences are identified
+6. Tasks are extracted from those sentences
+7. Assignees are detected based on names in the transcript
+8. Priority is classified using keyword-based logic
+9. Completed tasks are auto-detected or manually marked
+10. Data is stored in MongoDB
+11. Dashboard displays:
+
+* All Tasks
+* My Tasks
+* Completed Tasks
 
 ---
 
 ## 🧠 Task Logic
 
-The system detects tasks using action keywords such as:
+### 🔹 Action Detection
+
+The system identifies tasks using action-based keywords such as:
 
 * fix
 * review
@@ -86,100 +124,75 @@ The system detects tasks using action keywords such as:
 * test
 * debug
 
-Completion detection uses keywords like:
+---
+
+### 🔹 Completion Detection
+
+Tasks are marked as completed if they contain keywords like:
 
 * done
 * completed
 * submitted
 * finished
 
+---
+
+### 🔹 Intelligent Processing
+
 The system also:
 
 * Splits long sentences into multiple tasks
-* Ignores filler phrases where possible
-* Converts unstructured text into structured actions
+* Removes unnecessary filler phrases
+* Assigns tasks based on detected names
+* Deduplicates repeated or similar tasks
+* Converts unstructured text into structured data
 
 ---
 
 ## 🔗 API Endpoints
 
-### POST /login
+### 🔐 Authentication
 
+**POST /register**
+Register a new user
+
+**POST /login**
 Login user
 
-```json
-{
-  "username": "Neha"
-}
-```
+---
+
+### 📊 Task State
+
+**GET /state/:userId**
+Fetch all tasks for a user
+
+**POST /state/:userId**
+Save or update tasks
 
 ---
 
-### POST /tasks
+### 🧠 NLP Processing
 
-Save extracted tasks
-
-```json
-{
-  "username": "Neha",
-  "taskList": ["prepare slides", "send report"]
-}
-```
+**POST /analyze**
+Analyze transcript and extract tasks
 
 ---
 
-### GET /tasks/:username
+### 🔄 Utility
 
-Fetch user tasks
+**POST /reset/:userId**
+Reset user task board
 
----
-
-### POST /done
-
-Mark task as completed
-
-```json
-{
-  "username": "Neha",
-  "task": "send report"
-}
-```
-
----
-
-### GET /done/:username
-
-Fetch completed tasks
-
----
-
-### POST /saveMeeting
-
-Save transcript + tasks
-
-```json
-{
-  "username": "Neha",
-  "transcript": "Neha send report",
-  "tasks": ["send report"]
-}
-```
-
----
-
-### GET /meetings
-
-Fetch all stored meetings
+**GET /health**
+Check backend status
 
 ---
 
 ## 🧪 Example Input
 
-```text
+```
 Priya fix the UI alignment and check navbar.
-
 Arjun debug the backend APIs.
-
 Neha prepare slides and send them to the team.
 ```
 
@@ -206,39 +219,68 @@ Neha prepare slides and send them to the team.
 
 ## 📸 Screenshots
 
-### 🔹 Login Page
+### 🔐 Login & Registration
 
-<img width="436" height="531" alt="Screenshot 2026-04-16 202550" src="https://github.com/user-attachments/assets/f3b74c5f-9557-4da1-a41e-d325f75615c8" />
+![Login](<img width="1422" height="888" alt="login" src="https://github.com/user-attachments/assets/d1c05f87-6953-4b3f-91fa-c940530b0367" />
+)
 
+A clean authentication interface with secure password handling using bcrypt.
 
-### 🔹 Task Board
+---
 
-<img width="1905" height="921" alt="Screenshot 2026-04-16 211250" src="https://github.com/user-attachments/assets/750fcccf-0064-4633-8c5d-1dc1af496397" />
+### 📊 Dashboard (Before Analysis)
 
-### 🔹 Extracted Tasks
+![Empty Dashboard](<img width="1878" height="959" alt="dashboard-empty" src="https://github.com/user-attachments/assets/23555716-2d1d-4a1b-b7ef-718114875744" />
+)
 
-<img width="1895" height="896" alt="Screenshot 2026-04-16 211356" src="https://github.com/user-attachments/assets/5aaf7ff6-c2cf-4633-af17-e58e4028c96d" />
+Users can paste transcripts and enter identity before generating tasks.
 
+---
 
-### 🔹 Done Section
+### 🧠 Dashboard (After Analysis)
 
-<img width="1862" height="855" alt="Screenshot 2026-04-16 195956" src="https://github.com/user-attachments/assets/b83e4029-8212-46b3-bf1d-5552c430c47d" />
+![Filled Dashboard](<img width="1891" height="960" alt="dashboard-filled" src="https://github.com/user-attachments/assets/2463e205-6e1b-47fc-9974-c5f139d156f3" />
+)
 
-### 🔹 Mongodb Section
- <img width="1916" height="1076" alt="Screenshot 2026-04-16 200305" src="https://github.com/user-attachments/assets/bcaced68-f9f1-4331-a4f6-074afafe3348" />
+Automatically extracted tasks with priority and assignee classification.
 
+---
+
+### 📋 Task Management
+
+![Tasks](<img width="1911" height="929" alt="tasks" src="https://github.com/user-attachments/assets/7adc6f2c-ff74-40db-9ed7-74a4d5672c89" />
+)
+
+Users can edit, delete, and manage tasks interactively.
+
+---
+
+### ✅ Completed Tasks
+
+![Done](<img width="1811" height="842" alt="done" src="https://github.com/user-attachments/assets/4d888f39-a24e-4f7f-bf68-2ee4cb62ef4b" />
+)
+
+Completed tasks are clearly separated for better tracking.
+
+---
+
+### 🗄️ MongoDB Database
+
+![MongoDB](<img width="1875" height="820" alt="mongo " src="https://github.com/user-attachments/assets/783e6b66-f404-4afe-bef9-9c98cff35260" />
+)
+
+All user data, tasks, and transcript history are stored in MongoDB Atlas.
 
 ---
 
 ## 🚧 Future Improvements
 
-* Advanced NLP / AI-based extraction
-* Improved assignee detection
-* Secure authentication (JWT)
-* Real-time collaboration
-* Task deadlines and reminders
-* Team dashboards
-* Export to PDF or CSV
+* 🤖 AI/LLM-based NLP instead of rule-based
+* 🔐 JWT-based authentication
+* 👥 Real-time collaboration
+* ⏰ Task deadlines and reminders
+* 📊 Team dashboards
+* 📤 Export to PDF or CSV
 
 ---
 
@@ -246,8 +288,9 @@ Neha prepare slides and send them to the team.
 
 This project is developed for academic and learning purposes.
 
-## 📄 Project Report
+---
 
-You can view the full project report here:
+## 👩‍💻 Author
 
-[📥 Download Report](./AI_Task_Board_Report.pdf)
+**Ananya H**
+Full Stack Developer | AI Enthusiast
